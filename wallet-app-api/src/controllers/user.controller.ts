@@ -13,10 +13,10 @@ export class UserController {
   ) {}
 
   @Get('/info')
-  async getUserData(@Headers() header, @Res() res: Response) {
+  async getUserData(@Headers() headers, @Res() res: Response) {
     try {
-      const user = await this.authService.decodeToken(header.authorization);
-      const userData = await this.userService.getUserInfo(user.id);
+      const userId = headers.userId;
+      const userData = await this.userService.getUserInfo(userId);
       return res.status(200).json(toJSObject(userData));
     } catch (err: any) {
       res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });

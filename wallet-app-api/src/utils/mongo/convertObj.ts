@@ -7,6 +7,7 @@ export const toJSObject = <T>(doc: T): T => {
   obj.id = obj['_id'];
   delete obj['_id'];
   delete obj['__v'];
+  delete obj['password'];
   return obj;
 };
 

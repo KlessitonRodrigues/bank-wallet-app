@@ -13,18 +13,6 @@ export class User extends Document {
   cpf: string;
 
   @Prop({ required: true })
-  cnpj: string;
-
-  @Prop({ required: true })
-  password: string;
-
-  @Prop({ required: true })
-  verifyCode: string;
-
-  @Prop({ required: true })
-  verifyCodeTime: string;
-
-  @Prop({ required: true })
   email: string;
 }
 

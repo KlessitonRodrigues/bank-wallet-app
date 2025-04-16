@@ -7,7 +7,10 @@ export class Account extends Document {
   userId: string;
 
   @Prop({ required: true })
-  accountAmount: string;
+  amount: string;
+
+  @Prop({ required: true })
+  password: string;
 }
 
 export const AccountModel = SchemaFactory.createForClass(Account);
