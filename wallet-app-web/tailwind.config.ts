@@ -30,6 +30,7 @@ const config: Config = {
       "default-blue": colors.blue["500"],
       "default-white": colors.gray["50"],
       "default-black": colors.gray["800"],
+      "opacity-black": "#0002",
       ...colors,
     }),
     borderRadius: {
@@ -38,6 +39,7 @@ const config: Config = {
       lg: "12px",
       xl: "16px",
       "2xl": "20px",
+      full: "50%",
     },
     fontSize: {
       xs: "14px",

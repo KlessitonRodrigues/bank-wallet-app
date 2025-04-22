@@ -9,8 +9,9 @@ export class AuthMiddleware implements NestMiddleware {
 
   async use(req: Request, res: Response, next: NextFunction) {
     try {
-      const token = await this.authService.decodeToken(req.headers.authorization);
+      console.log('AuthMiddleware', req.path);
 
+      const token = await this.authService.decodeToken(req.headers.authorization);
       if (!token.id) {
         res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Invalid Token' });
         return;

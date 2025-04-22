@@ -13,6 +13,12 @@ import { UserService } from './services/user.service';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes({ path: '/user/*', method: RequestMethod.ALL });
+    consumer
+      .apply(AuthMiddleware)
+      .exclude(
+        { path: '/auth/', method: RequestMethod.ALL },
+        { path: '/public/', method: RequestMethod.ALL },
+      )
+      .forRoutes({ path: '/', method: RequestMethod.ALL });
   }
 }
