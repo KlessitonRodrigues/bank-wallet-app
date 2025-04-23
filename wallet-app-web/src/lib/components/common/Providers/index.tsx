@@ -1,13 +1,9 @@
 "use client";
 
-import { DefaultToastOptions, Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { QueryClientProvider } from "react-query";
-import { queryClient } from "src/services/useQueryClient";
-
-const toastOptions: DefaultToastOptions = {
-  duration: 8000,
-  style: { minWidth: "20rem" },
-};
+import { queryClient } from "src/services/queryClient";
+import { toastOptions } from "src/services/toastOption";
 
 const Providers = ({ children }: React.PropsWithChildren) => {
   return (

@@ -7,7 +7,8 @@ export const Card = ({ className, ...props }: ICard) => {
     <div
       {...props}
       className={twMerge(
-        `w-full p-4 rounded-md shadow-sm text-text1 bg-white hover:shadow-md transition-shadow ${className}`
+        `w-full flex flex-col items-start gap-2 p-4 rounded-md shadow-sm 
+         text-text1 bg-white hover:shadow-md transition-shadow ${className}`
       )}
     />
   );

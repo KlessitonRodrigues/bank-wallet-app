@@ -6,21 +6,27 @@ const onFetchData = () => {
 };
 
 const onSendData = () => {
-  toast.loading("Enviando dados...", { id: "request" });
+  toast.loading("Enviando...", { id: "request" });
+};
+
+const onSendSuccess = () => {
+  toast.success("Dados salvos", { id: "request" });
 };
 
 const onFetchError = (error: any) => {
-  const msg = error?.response?.data?.message || error?.message || "Error";
+  const msg =
+    error?.response?.data?.message ||
+    error?.message ||
+    "Error ao carregar dados!";
   toast.error(msg, { id: "request" });
 };
 
 const onSendError = (error: any) => {
-  const msg = error?.response?.data?.message || error?.message || "Error";
+  const msg =
+    error?.response?.data?.message ||
+    error?.message ||
+    "Error ao enviar dados!";
   toast.error(msg, { id: "request" });
-};
-
-const onSendSuccess = (error: any) => {
-  toast.success("Dados salvos", { id: "request" });
 };
 
 export const queryClient = new QueryClient({

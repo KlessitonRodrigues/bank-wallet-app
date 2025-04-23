@@ -9,7 +9,7 @@ export const Button = ({ className = "", ...props }: IButton) => {
       className={twMerge(
         `flex items-center gap-1 px-3 py-1.5 min-w-fit 
          rounded-md shadow-sm text-text4 bg-white hover:bg-opacity-70
-         transition-opacity first-letter:uppercase select-none ${className}`
+         transition first-letter:uppercase select-none ${className}`
       )}
     />
   );
