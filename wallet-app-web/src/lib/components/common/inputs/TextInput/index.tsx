@@ -1,4 +1,4 @@
-import { ErrorLabel, Input, Label } from "src/lib/base/form/inputs";
+import { LabelError, Input, Label } from "src/lib/base/form/inputs";
 
 type IInputField = {
   name?: string;
@@ -7,11 +7,12 @@ type IInputField = {
   error?: string;
   input?: any;
   value?: string;
-  onChange?: (value: string) => void;
+  onChangeValue?: (value: string) => void;
 };
 
 const TextInput = (props: IInputField) => {
-  const { name, label, placeholder, error, input, value, onChange } = props;
+  const { name, label, placeholder, error, input, value, onChangeValue } =
+    props;
 
   return (
     <Label>
@@ -23,11 +24,11 @@ const TextInput = (props: IInputField) => {
         placeholder={placeholder}
         autoComplete={name}
         value={value}
-        className={`${error && "border-default-red"}`}
-        onChange={(ev: any) => onChange?.(ev.target?.value)}
+        onChange={(ev: any) => onChangeValue?.(ev.target?.value)}
+        haserror={error}
         {...input}
       />
-      <ErrorLabel>{error}</ErrorLabel>
+      <LabelError>{error}</LabelError>
     </Label>
   );
 };

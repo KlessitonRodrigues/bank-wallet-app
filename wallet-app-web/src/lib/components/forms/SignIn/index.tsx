@@ -12,6 +12,9 @@ import { ButtonOutline } from "src/lib/base/buttons/ButtonOutline";
 import { PiSignIn, PiUser } from "react-icons/pi";
 import TextInput from "../../common/inputs/TextInput";
 import { Form } from "src/lib/base/form/forms";
+import PasswordInput from "../../common/inputs/PasswordInput";
+import NumberInput from "../../common/inputs/NumberInput";
+import DateInput from "../../common/inputs/DateInput";
 
 const SignInForm = (props: any) => {
   const { goAccountForm } = props;
@@ -32,16 +35,26 @@ const SignInForm = (props: any) => {
       <Form onSubmit={form.handleSubmit(onSubmit)}>
         <Text>Login</Text>
         <TextInput
-          name="email"
           label="Email"
           placeholder="Digite o email"
           input={register("email")}
           error={formState.errors.email?.message}
         />
-        <TextInput
-          name="password"
+        <PasswordInput
           label="Senha"
           placeholder="Digite a senha"
+          input={register("password")}
+          error={formState.errors.password?.message}
+        />
+        <NumberInput
+          label="Telefone"
+          placeholder="Digite o número de telefone"
+          input={register("password")}
+          error={formState.errors.password?.message}
+        />
+        <DateInput
+          label="Data"
+          placeholder="Digite a data"
           input={register("password")}
           error={formState.errors.password?.message}
         />

@@ -1,10 +1,26 @@
-import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
-import { ErrorLabel, Input, InputIconRight, Label } from "../../styled/Inputs";
-import { Row } from "../../styled/Flex";
 import { useState } from "react";
+import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
+import { Row } from "src/lib/base/containers/Flex";
+import {
+  LabelError,
+  Input,
+  Label,
+  LabelIconRight,
+} from "src/lib/base/form/inputs";
 
-const PasswordInput = (props: Props.InputField) => {
-  const { name, label, placeholder, error, input } = props;
+type IInputField = {
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  error?: string;
+  input?: any;
+  value?: string;
+  onChangeValue?: (value: string) => void;
+};
+
+const PasswordInput = (props: IInputField) => {
+  const { name, label, placeholder, error, input, value, onChangeValue } =
+    props;
   const [visible, setVisible] = useState(false);
 
   return (
@@ -17,20 +33,21 @@ const PasswordInput = (props: Props.InputField) => {
           name={name}
           placeholder={placeholder}
           autoComplete={name}
-          error={!!error}
+          value={value}
+          onChange={(ev: any) => onChangeValue?.(ev.target?.value)}
+          haserror={error}
           {...input}
         />
-        <InputIconRight>
+        <LabelIconRight>
           {visible && (
             <PiEyeBold size={22} onClick={() => setVisible(!visible)} />
           )}
           {!visible && (
             <PiEyeClosedBold size={22} onClick={() => setVisible(!visible)} />
           )}
-        </InputIconRight>
+        </LabelIconRight>
       </Row>
-
-      <ErrorLabel>{error}</ErrorLabel>
+      <LabelError>{error}</LabelError>
     </Label>
   );
 };

@@ -1,7 +1,18 @@
-import { ErrorLabel, Input, Label } from "../../styled/Inputs";
+import { LabelError, Input, Label } from "src/lib/base/form/inputs";
 
-const DateInput = (props: Props.InputField) => {
-  const { name, label, placeholder, error, input, value, onChange } = props;
+type IInputField = {
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  error?: string;
+  input?: any;
+  value?: string;
+  onChangeValue?: (value: string) => void;
+};
+
+const DateInput = (props: IInputField) => {
+  const { name, label, placeholder, error, input, value, onChangeValue } =
+    props;
 
   return (
     <Label>
@@ -12,12 +23,17 @@ const DateInput = (props: Props.InputField) => {
         name={name}
         placeholder={placeholder}
         autoComplete={name}
-        error={!!error}
         value={value}
-        onChange={(ev) => onChange?.(ev.target.value)}
+        haserror={error}
+        onChange={(ev: any) => onChangeValue?.(ev.target?.value)}
+        onKeyDown={(ev) => {
+          if (ev.key.length === 1 && ev.key.match(/[\D]/g)) {
+            ev.preventDefault();
+          }
+        }}
         {...input}
       />
-      <ErrorLabel>{error}</ErrorLabel>
+      <LabelError>{error}</LabelError>
     </Label>
   );
 };
