@@ -1,68 +1,31 @@
 "use client";
-import Page from "src/lib/base/containers/Page";
-import Header from "src/lib/components/common/Header";
 
+import { useState } from "react";
+import { AnimationBox, AnimationSlide } from "src/lib/base/animations/Slide";
+import { Button } from "src/lib/base/buttons/Button";
+import { Row } from "src/lib/base/containers/Flex";
+import { Drawer } from "src/lib/base/drawers/Drawer";
 import Providers from "src/lib/components/common/Providers";
 import SignInForm from "src/lib/components/forms/SignIn";
-import { useState } from "react";
-import { ButtonBlue } from "src/lib/base/buttons/Button";
-import { Row } from "src/lib/base/containers/Flex";
-import { AnimationBox, AnimationSlide } from "src/lib/base/animations/Slide";
-import { Card } from "src/lib/base/cards/Card";
-import TableView from "src/lib/components/common/Table";
+import SignUpForm from "src/lib/components/forms/SignUp";
 
 const HomePage = () => {
   const [step, setStep] = useState(0);
+  const [modal, setModal] = useState(false);
 
   return (
     <Providers>
-      <Page>
-        <Header />
+      <h1>HOME</h1>
+      <Button onClick={() => setModal(!modal)}>Open</Button>
+      <Row>
         <AnimationBox>
-          {step === 0 && (
-            <AnimationSlide key={0} to="right">
-              <SignInForm />
-            </AnimationSlide>
-          )}
-          {step === 1 && (
-            <AnimationSlide key={1} to="right">
-              <SignInForm />
-            </AnimationSlide>
-          )}
-          {step === 2 && (
-            <AnimationSlide key={2} to="right">
-              <SignInForm />
-            </AnimationSlide>
-          )}
-          {step === 3 && (
-            <AnimationSlide key={3} to="right">
-              <SignInForm />
-            </AnimationSlide>
-          )}
+          <AnimationSlide>{step === 0 && <SignInForm />}</AnimationSlide>
+          <AnimationSlide>{step === 1 && <SignUpForm />}</AnimationSlide>
         </AnimationBox>
-        <Row>
-          <ButtonBlue onClick={() => setStep(step - 1)}>Previous</ButtonBlue>
-          <ButtonBlue onClick={() => setStep(step + 1)}>Next</ButtonBlue>
-        </Row>
-        <Card>
-          <TableView
-            headers={[
-              { key: "email", label: "Email" },
-              { key: "phone", label: "Phone" },
-              { key: "rule", label: "Regra" },
-              { key: "dob", label: "Data de Nacimento" },
-            ]}
-            rows={[
-              {
-                email: "test1@email.com",
-                phone: "123123131233",
-                rule: "admin",
-                dob: "13/02/21",
-              },
-            ]}
-          />
-        </Card>
-      </Page>
+      </Row>
+      <Drawer label="Login" visible={modal} onClose={() => setModal(!modal)}>
+        <SignInForm />
+      </Drawer>
     </Providers>
   );
 };

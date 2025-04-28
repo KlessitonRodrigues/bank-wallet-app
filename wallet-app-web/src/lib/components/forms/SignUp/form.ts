@@ -2,7 +2,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Resolver } from "react-hook-form";
 import { z } from "zod";
 
-const values: Form.SignUp = {
+export type ISignUpForm = {
+  cpf?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  rule?: string;
+};
+
+const values: ISignUpForm = {
   cpf: "",
   name: "",
   email: "",

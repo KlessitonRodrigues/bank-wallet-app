@@ -30,7 +30,7 @@ const config: Config = {
       "default-blue": colors.blue["500"],
       "default-white": colors.gray["50"],
       "default-black": colors.gray["800"],
-      "opacity-black": "#0002",
+      "opacity-black": "#0006",
       ...colors,
     }),
     borderRadius: {
