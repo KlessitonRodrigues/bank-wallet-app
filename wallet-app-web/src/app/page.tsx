@@ -8,6 +8,8 @@ import { useState } from "react";
 import { ButtonBlue } from "src/lib/base/buttons/Button";
 import { Row } from "src/lib/base/containers/Flex";
 import { AnimationBox, AnimationSlide } from "src/lib/base/animations/Slide";
+import { Card } from "src/lib/base/cards/Card";
+import TableView from "src/lib/components/common/Table";
 
 const HomePage = () => {
   const [step, setStep] = useState(0);
@@ -42,6 +44,24 @@ const HomePage = () => {
           <ButtonBlue onClick={() => setStep(step - 1)}>Previous</ButtonBlue>
           <ButtonBlue onClick={() => setStep(step + 1)}>Next</ButtonBlue>
         </Row>
+        <Card>
+          <TableView
+            headers={[
+              { key: "email", label: "Email" },
+              { key: "phone", label: "Phone" },
+              { key: "rule", label: "Regra" },
+              { key: "dob", label: "Data de Nacimento" },
+            ]}
+            rows={[
+              {
+                email: "test1@email.com",
+                phone: "123123131233",
+                rule: "admin",
+                dob: "13/02/21",
+              },
+            ]}
+          />
+        </Card>
       </Page>
     </Providers>
   );
