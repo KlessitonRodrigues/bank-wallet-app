@@ -1,63 +1,47 @@
-import {
-  ButtonBlue,
-  ButtonGreen,
-  ButtonRed,
-  ButtonYellow,
-} from "src/lib/base/buttons/Button";
-import { ButtonOutline } from "src/lib/base/buttons/ButtonOutline";
-import { Card } from "src/lib/base/cards/Card";
-import { Row } from "src/lib/base/containers/Flex";
+"use client";
 import Page from "src/lib/base/containers/Page";
 import Header from "src/lib/components/common/Header";
-import {
-  PiFloppyDiskBack,
-  PiPaintBrushBold,
-  PiPen,
-  PiPlusBold,
-  PiTrashBold,
-} from "react-icons/pi";
-import { Text } from "src/lib/base/text/Title";
-import { Title } from "src/lib/base/text/Text";
+
 import Providers from "src/lib/components/common/Providers";
 import SignInForm from "src/lib/components/forms/SignIn";
+import { useState } from "react";
+import { ButtonBlue } from "src/lib/base/buttons/Button";
+import { Row } from "src/lib/base/containers/Flex";
+import { AnimationBox, AnimationSlide } from "src/lib/base/animations/Slide";
 
 const HomePage = () => {
+  const [step, setStep] = useState(0);
+
   return (
     <Providers>
       <Page>
         <Header />
-        <Card>
-          <Title>TEST</Title>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum cumque
-            facilis dolor sit alias dolorem impedit error sint illo voluptatibus
-            corrupti expedita, saepe, rerum, animi voluptates maiores cum minus
-            laborum?
-          </Text>
-          <Row>
-            <ButtonBlue>
-              <PiPlusBold size={18} />
-              Adicionar
-            </ButtonBlue>
-            <ButtonGreen>
-              <PiFloppyDiskBack size={18} />
-              Salvar
-            </ButtonGreen>
-            <ButtonRed>
-              <PiTrashBold size={18} />
-              Remover
-            </ButtonRed>
-            <ButtonYellow>
-              <PiPen size={18} />
-              Editar
-            </ButtonYellow>
-            <ButtonOutline>
-              <PiPaintBrushBold size={18} />
-              Limpar
-            </ButtonOutline>
-          </Row>
-        </Card>
-        <SignInForm />
+        <AnimationBox>
+          {step === 0 && (
+            <AnimationSlide key={0} to="right">
+              <SignInForm />
+            </AnimationSlide>
+          )}
+          {step === 1 && (
+            <AnimationSlide key={1} to="right">
+              <SignInForm />
+            </AnimationSlide>
+          )}
+          {step === 2 && (
+            <AnimationSlide key={2} to="right">
+              <SignInForm />
+            </AnimationSlide>
+          )}
+          {step === 3 && (
+            <AnimationSlide key={3} to="right">
+              <SignInForm />
+            </AnimationSlide>
+          )}
+        </AnimationBox>
+        <Row>
+          <ButtonBlue onClick={() => setStep(step - 1)}>Previous</ButtonBlue>
+          <ButtonBlue onClick={() => setStep(step + 1)}>Next</ButtonBlue>
+        </Row>
       </Page>
     </Providers>
   );

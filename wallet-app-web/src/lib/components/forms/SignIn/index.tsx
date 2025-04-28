@@ -15,6 +15,8 @@ import { Form } from "src/lib/base/form/forms";
 import PasswordInput from "../../common/inputs/PasswordInput";
 import NumberInput from "../../common/inputs/NumberInput";
 import DateInput from "../../common/inputs/DateInput";
+import SelectionInput from "../../common/inputs/SelectionInput";
+import { AnimationSlide } from "src/lib/base/animations/Slide";
 
 const SignInForm = (props: any) => {
   const { goAccountForm } = props;
@@ -57,6 +59,17 @@ const SignInForm = (props: any) => {
           placeholder="Digite a data"
           input={register("password")}
           error={formState.errors.password?.message}
+        />
+        <SelectionInput
+          label="Tipo de usuário"
+          placeholder="Selecionar"
+          error={formState.errors.email?.message}
+          onChange={(option) => form.setValue("email", option.value)}
+          options={[
+            { label: "Admin", value: "admin" },
+            { label: "Convidado", value: "guest" },
+            { label: "Cliente", value: "user" },
+          ]}
         />
         <Row>
           <ButtonBlue>

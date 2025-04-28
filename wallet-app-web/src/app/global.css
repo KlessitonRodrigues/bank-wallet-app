@@ -34,3 +34,15 @@ body {
 .loader-spinner {
   animation: l1 0.5s ease-out infinite;
 }
+
+.react-selector {
+  @apply w-full;
+}
+
+.react-selector__control {
+  @apply border rounded-md;
+}
+
+.react-selector.error .react-selector__control {
+  @apply border-default-red;
+}

@@ -1,7 +1,17 @@
 import Select from "react-select";
-import { ErrorLabel, Label } from "../../styled/Inputs";
+import { Label, LabelError } from "src/lib/base/form/inputs";
 
-const SelectionInput = (props: Props.SelectionField) => {
+type ISelectionField = {
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  error?: string;
+  value?: string;
+  options?: { value: string; label: string }[];
+  onChange?: (option: { value: string; label: string }) => void;
+};
+
+const SelectionInput = (props: ISelectionField) => {
   const { label, placeholder, error, options, onChange } = props;
 
   return (
@@ -19,7 +29,7 @@ const SelectionInput = (props: Props.SelectionField) => {
           onChange && onChange(value);
         }}
       />
-      <ErrorLabel>{error}</ErrorLabel>
+      <LabelError>{error}</LabelError>
     </Label>
   );
 };
