@@ -1,17 +1,27 @@
-import { LabelError, Input, Label } from "src/lib/base/form/inputs";
+import {
+  LabelError,
+  Input,
+  Label,
+  InputDisplay,
+} from "src/lib/base/form/inputs";
+import { templateStr } from "src/utils/strings";
 
 type IInputField = {
   name?: string;
   label?: string;
   placeholder?: string;
   error?: string;
+  mask?: string;
+  length?: string;
+  max?: string;
+  min?: string;
   input?: any;
   value?: string;
   onChangeValue?: (value: string) => void;
 };
 
 const NumberInput = (props: IInputField) => {
-  const { name, label, placeholder, error, input, value, onChangeValue } =
+  const { name, label, placeholder, error, mask, input, value, onChangeValue } =
     props;
 
   return (
@@ -19,20 +29,24 @@ const NumberInput = (props: IInputField) => {
       {label}
       <Input
         type="text"
+        className="opacity-0"
         id={name}
         name={name}
         placeholder={placeholder}
         autoComplete={name}
         value={value}
-        haserror={error}
+        data-error={!!error}
         onChange={(ev: any) => onChangeValue?.(ev.target?.value)}
-        onKeyDown={(ev) => {
-          if (ev.key.length === 1 && ev.key.match(/[\D]/g)) {
-            ev.preventDefault();
-          }
+        onKeyUp={(ev: any) => {
+          const ipt = document.getElementById(label || "");
+          if (!ipt || !mask) return;
+          ipt.innerText = templateStr(ev.target.value, mask);
         }}
         {...input}
       />
+      <InputDisplay className="-mt-10" id={label} data-error={!!error}>
+        {mask}
+      </InputDisplay>
       <LabelError>{error}</LabelError>
     </Label>
   );

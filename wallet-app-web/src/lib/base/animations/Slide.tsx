@@ -7,7 +7,7 @@ type IAnimationSlide = {
 };
 
 export const AnimationBox = ({ children }: PropsWithChildren) => {
-  return <AnimatePresence mode="wait">{children}</AnimatePresence>;
+  return <AnimatePresence>{children}</AnimatePresence>;
 };
 
 export const AnimationSlide = (props: IAnimationSlide) => {

@@ -34,8 +34,8 @@ const PasswordInput = (props: IInputField) => {
           placeholder={placeholder}
           autoComplete={name}
           value={value}
+          data-error={!!error}
           onChange={(ev: any) => onChangeValue?.(ev.target?.value)}
-          haserror={error}
           {...input}
         />
         <LabelIconRight>

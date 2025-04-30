@@ -11,6 +11,7 @@ import { PiSignIn, PiUser } from "react-icons/pi";
 import TextInput from "../../common/inputs/TextInput";
 import { Form } from "src/lib/base/form/forms";
 import PasswordInput from "../../common/inputs/PasswordInput";
+import NumberInput from "../../common/inputs/NumberInput";
 
 const SignInForm = (props: any) => {
   const { goAccountForm } = props;
@@ -39,6 +40,27 @@ const SignInForm = (props: any) => {
         placeholder="Digite a senha"
         input={register("password")}
         error={formState.errors.password?.message}
+      />
+      <NumberInput
+        label="Valor"
+        placeholder="Digite o valor"
+        mask="R$ _"
+        input={register("tel")}
+        error={formState.errors.tel?.message}
+      />
+      <NumberInput
+        label="Percent"
+        placeholder="Digite o valor"
+        mask="% _"
+        input={register("tel")}
+        error={formState.errors.tel?.message}
+      />
+      <NumberInput
+        label="Telefone"
+        placeholder="Digite o telefone"
+        mask="(xx) xxxxx-xxxx"
+        input={register("value")}
+        error={formState.errors.value?.message}
       />
       <Row>
         <ButtonBlue>

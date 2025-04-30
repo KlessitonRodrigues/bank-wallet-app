@@ -11,6 +11,7 @@ import { ButtonBlue } from "src/lib/base/buttons/Button";
 import { ISignInForm } from "../SignIn/form";
 import { signUpform } from "./form";
 import { PiSignIn, PiUserPlus } from "react-icons/pi";
+import { Card } from "src/lib/base/cards/Card";
 
 const SignUpForm = () => {
   const { register, formState, ...form } = useForm(signUpform);
