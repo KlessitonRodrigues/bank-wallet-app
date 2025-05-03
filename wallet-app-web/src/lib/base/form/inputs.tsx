@@ -38,7 +38,8 @@ export const Input = forwardRef<any, IInput>((props, ref) => {
          outline-none hover:border-default-blue focus:border-default-blue
          data-[error=true]:border-default-red
          [&:hover~div]:border-default-blue [&:focus~div]:border-default-blue
-         [&:focus~div]:text-default-blue data-[error=true]:[&~div]:border-default-red
+         [&:focus~div]:text-default-blue [&~div]:data-[error=true]:border-default-red
+         [&~div]:empty:text-default-gray
          ${className}`
       )}
     />

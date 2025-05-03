@@ -1,4 +1,4 @@
-export const templateStr = (str: string, template: string) => {
+export const formatStr = (str: string, template: string) => {
   const newStr = Array.from(template);
   const splice = newStr.indexOf("_");
 

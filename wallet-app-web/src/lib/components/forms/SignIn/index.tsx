@@ -12,6 +12,7 @@ import TextInput from "../../common/inputs/TextInput";
 import { Form } from "src/lib/base/form/forms";
 import PasswordInput from "../../common/inputs/PasswordInput";
 import NumberInput from "../../common/inputs/NumberInput";
+import CurrencyInput from "../../common/inputs/CurrencyInput";
 
 const SignInForm = (props: any) => {
   const { goAccountForm } = props;
@@ -42,23 +43,15 @@ const SignInForm = (props: any) => {
         error={formState.errors.password?.message}
       />
       <NumberInput
-        label="Valor"
-        placeholder="Digite o valor"
-        mask="R$ _"
-        input={register("tel")}
-        error={formState.errors.tel?.message}
-      />
-      <NumberInput
-        label="Percent"
-        placeholder="Digite o valor"
-        mask="% _"
-        input={register("tel")}
-        error={formState.errors.tel?.message}
-      />
-      <NumberInput
         label="Telefone"
         placeholder="Digite o telefone"
         mask="(xx) xxxxx-xxxx"
+        input={register("tel")}
+        error={formState.errors.tel?.message}
+      />
+      <CurrencyInput
+        label="Moeda"
+        currency="R$"
         input={register("value")}
         error={formState.errors.value?.message}
       />
