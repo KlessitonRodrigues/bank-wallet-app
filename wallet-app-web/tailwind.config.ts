@@ -26,7 +26,7 @@ const config: Config = {
       "default-yellow": colors.yellow["600"],
       "default-red": colors.red["700"],
       "default-green": colors.green["600"],
-      "default-gray": colors.gray["500"],
+      "default-gray": colors.gray["400"],
       "default-blue": colors.blue["500"],
       "default-white": colors.gray["50"],
       "default-black": colors.gray["800"],

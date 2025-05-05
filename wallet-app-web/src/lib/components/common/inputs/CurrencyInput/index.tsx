@@ -8,7 +8,6 @@ import {
 type IInputField = {
   name?: string;
   label?: string;
-  placeholder?: string;
   error?: string;
   currency?: string;
   maxLength?: number;
@@ -19,34 +18,33 @@ type IInputField = {
   onChangeValue?: (value: string) => void;
 };
 
-const handleCurrencyIpt = (ev: any) => {
-  const key = ev.key as string;
-  const ipt = ev.target as HTMLInputElement;
-  const display = document.getElementById(`display-${ipt.name}`);
-  const formatValue = (value: string, add: string) => {
-    const valueArr = (value || "0.00").split("");
-    const i = valueArr.indexOf(".");
-    valueArr.splice(i, 1);
-
-    if (add) {
-      valueArr.push(add);
-      valueArr.splice(i + 1, 0, ".");
-    } else {
-      valueArr.pop();
-      valueArr.splice(i - 1, 0, ".");
-    }
-    return Number(valueArr.join("")).toFixed(2);
-  };
-  console.log(ipt.value);
-
-  if (key === "Backspace") ipt.value = formatValue(ipt.value, "");
-  if (key.match(/\d/)) ipt.value = formatValue(ipt.value, key);
-  if (display) display.innerText = ipt.value;
-  ev.preventDefault();
-};
-
 const CurrencyInput = (props: IInputField) => {
-  const { name, input, currency = "", onChangeValue } = props;
+  const { name, input, currency = "$", onChangeValue } = props;
+
+  const handleCurrencyIpt = (ev: any) => {
+    ev.preventDefault();
+    const key = ev.key as string;
+    const ipt = ev.target as HTMLInputElement;
+    const display = document.getElementById(`display-${ipt.name}`);
+    const formatValue = (value: string, add: string) => {
+      const valueArr = (value || "0.00").split("");
+      const i = valueArr.indexOf(".");
+      valueArr.splice(i, 1);
+
+      if (add) {
+        valueArr.push(add);
+        valueArr.splice(i + 1, 0, ".");
+      } else {
+        valueArr.pop();
+        valueArr.splice(i - 1, 0, ".");
+      }
+      return Number(valueArr.join("")).toFixed(2);
+    };
+
+    if (key === "Backspace") ipt.value = formatValue(ipt.value, "");
+    if (key.match(/\d/)) ipt.value = formatValue(ipt.value, key);
+    if (display) display.innerText = `${currency} ${ipt.value}`;
+  };
 
   return (
     <Label>
@@ -56,7 +54,6 @@ const CurrencyInput = (props: IInputField) => {
         className="opacity-0"
         id={name}
         name={name}
-        placeholder={props.placeholder}
         autoComplete={name}
         value={props.value}
         data-error={!!props.error}
@@ -65,7 +62,7 @@ const CurrencyInput = (props: IInputField) => {
         {...input}
       />
       <InputDisplay className="-mt-10" id={`display-${name || input?.name}`}>
-        {currency}
+        {`${currency} 0.00`}
       </InputDisplay>
       <LabelError>{props.error}</LabelError>
     </Label>

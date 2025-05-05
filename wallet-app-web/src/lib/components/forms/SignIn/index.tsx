@@ -18,9 +18,11 @@ const SignInForm = (props: any) => {
   const { goAccountForm } = props;
   const { register, formState, ...form } = useForm(signInform);
 
-  const onlogin = async (data: ISignInForm) =>
-    axiosClient.post("auth/sign-in", data);
-  const submitQuery = useMutation({ mutationFn: onlogin });
+  const onLogin = async (data: ISignInForm) => {
+    return axiosClient.post("auth/sign-in", data);
+  };
+
+  const submitQuery = useMutation({ mutationFn: onLogin });
 
   const onSubmit = async (data: ISignInForm) => {
     const res = await submitQuery.mutateAsync(data);

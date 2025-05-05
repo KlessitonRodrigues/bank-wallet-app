@@ -4,7 +4,6 @@ import {
   Label,
   InputDisplay,
 } from "src/lib/base/form/inputs";
-import { formatStr } from "src/utils/strings";
 
 type IInputField = {
   name?: string;
@@ -21,8 +20,29 @@ type IInputField = {
 };
 
 const NumberInput = (props: IInputField) => {
-  const { name, mask, maxLength, onChangeValue } = props;
-  const displayId = `ipt-display-${name || props?.input?.name}`;
+  const { name, mask = "", input, onChangeValue } = props;
+
+  const handleNumberIpt = (ev: any) => {
+    ev.preventDefault();
+    const key = ev.key as string;
+    const ipt = ev.target as HTMLInputElement;
+    const display = document.getElementById(`display-${ipt.name}`);
+    const maskLength = mask.matchAll(/(x)/g).toArray().length;
+
+    const formatMask = (str: string, template: string) => {
+      const maskArr = Array.from(template);
+      for (const char of str) {
+        const i = maskArr.indexOf("x");
+        if (i >= 0) maskArr[i] = char;
+      }
+      return maskArr.join("");
+    };
+
+    if (key === "Backspace") ipt.value = ipt.value.slice(0, -1);
+    if (ipt.value.length >= maskLength) return;
+    if (key.match(/\d/)) ipt.value += key;
+    if (display) display.innerText = formatMask(ipt.value, mask);
+  };
 
   return (
     <Label>
@@ -32,31 +52,14 @@ const NumberInput = (props: IInputField) => {
         className="opacity-0"
         id={name}
         name={name}
-        placeholder={props.placeholder}
         autoComplete={name}
         value={props.value}
         data-error={!!props.error}
         onChange={(ev: any) => onChangeValue?.(ev.target?.value)}
-        onKeyDown={(ev: any) => {
-          if (ev.key.length === 1) {
-            if (ev.key.match(/[\D]/g)) ev.preventDefault();
-            if (maxLength && ev.target.value?.length >= maxLength) {
-              ev.preventDefault();
-            }
-          }
-        }}
-        onKeyUp={(ev: any) => {
-          const ipt = document.getElementById(displayId);
-          if (!ipt || !mask) return;
-          ipt.innerText = formatStr(ev.target.value, mask);
-        }}
-        {...props.input}
+        onKeyDown={handleNumberIpt}
+        {...input}
       />
-      <InputDisplay
-        id={displayId}
-        className="-mt-10"
-        data-error={!!props.error}
-      >
+      <InputDisplay className="-mt-10" id={`display-${name || input?.name}`}>
         {props.placeholder}
       </InputDisplay>
       <LabelError>{props.error}</LabelError>
