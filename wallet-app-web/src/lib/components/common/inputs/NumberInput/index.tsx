@@ -8,7 +8,6 @@ import {
 type IInputField = {
   name?: string;
   label?: string;
-  placeholder?: string;
   error?: string;
   mask?: string;
   maxLength?: number;
@@ -60,7 +59,7 @@ const NumberInput = (props: IInputField) => {
         {...input}
       />
       <InputDisplay className="-mt-10" id={`display-${name || input?.name}`}>
-        {props.placeholder}
+        {props.mask}
       </InputDisplay>
       <LabelError>{props.error}</LabelError>
     </Label>

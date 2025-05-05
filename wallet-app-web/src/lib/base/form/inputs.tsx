@@ -34,7 +34,7 @@ export const Input = forwardRef<any, IInput>((props, ref) => {
       {...props}
       ref={ref}
       className={twMerge(
-        `w-full p-2 px-3 mt-1 border text-md rounded-md transition
+        `w-full p-2 px-3 mt-1 border text-md rounded-md transition peer
          outline-none hover:border-default-blue focus:border-default-blue
          data-[error=true]:border-default-red
          [&:hover~div]:border-default-blue [&:focus~div]:border-default-blue
@@ -50,7 +50,8 @@ export const InputDisplay = ({ className, ...props }: IDiv) => {
     <div
       {...props}
       className={twMerge(
-        `p-2 px-3 h-10 rounded-md bg-transparent border text-nowrap overflow-hidden ${className}`
+        `p-2 px-3 h-10 rounded-md border text-nowrap overflow-hidden
+         peer-placeholder-shown:text-default-gray ${className}`
       )}
     />
   );

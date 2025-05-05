@@ -42,6 +42,7 @@ const CurrencyInput = (props: IInputField) => {
     };
 
     if (key === "Backspace") ipt.value = formatValue(ipt.value, "");
+    if (ipt.value.length >= 14) return;
     if (key.match(/\d/)) ipt.value = formatValue(ipt.value, key);
     if (display) display.innerText = `${currency} ${ipt.value}`;
   };
