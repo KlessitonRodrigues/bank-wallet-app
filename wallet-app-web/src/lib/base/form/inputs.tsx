@@ -5,6 +5,8 @@ type IDiv = React.HTMLAttributes<HTMLDivElement>;
 type ILabel = React.HTMLAttributes<HTMLLabelElement>;
 type ISpan = React.HTMLAttributes<HTMLSpanElement>;
 type IInput = React.HTMLAttributes<HTMLInputElement> & { value?: string };
+type ISelect = React.HTMLAttributes<HTMLSelectElement> & { value?: string };
+type IOption = React.HTMLAttributes<HTMLOptionElement> & { value?: string };
 
 export const Label = ({ className, ...props }: ILabel) => {
   return (
@@ -53,6 +55,28 @@ export const InputDisplay = ({ className, ...props }: IDiv) => {
         `p-2 px-3 h-10 rounded-md border text-nowrap overflow-hidden
          peer-placeholder-shown:text-default-gray ${className}`
       )}
+    />
+  );
+};
+
+export const Select = ({ className, ...props }: ISelect) => {
+  return (
+    <select
+      {...props}
+      className={twMerge(
+        `w-full p-2 mt-1 border text-md rounded-md transition bg-transparent
+         outline-none hover:border-default-blue focus:border-default-blue
+         data-[error=true]:border-default-red ${className}`
+      )}
+    />
+  );
+};
+
+export const SelectOption = ({ className, ...props }: IOption) => {
+  return (
+    <option
+      {...props}
+      className={twMerge(`w-full bg-default-white ${className}`)}
     />
   );
 };

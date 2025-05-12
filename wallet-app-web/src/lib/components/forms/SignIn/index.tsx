@@ -13,6 +13,7 @@ import { Form } from "src/lib/base/form/forms";
 import PasswordInput from "../../common/inputs/PasswordInput";
 import NumberInput from "../../common/inputs/NumberInput";
 import CurrencyInput from "../../common/inputs/CurrencyInput";
+import SelectorInput from "../../common/inputs/SelectorInput";
 
 const SignInForm = (props: any) => {
   const { goAccountForm } = props;
@@ -46,7 +47,6 @@ const SignInForm = (props: any) => {
       />
       <NumberInput
         label="Telefone"
-        placeholder="Digite o telefone"
         mask="(xx) xxxxx-xxxx"
         input={register("tel")}
         error={formState.errors.tel?.message}
@@ -55,6 +55,18 @@ const SignInForm = (props: any) => {
         label="Moeda"
         currency="R$"
         input={register("value")}
+        error={formState.errors.value?.message}
+      />
+      <SelectorInput
+        label="Tipo de usuario"
+        placeholder="Selecionar"
+        value=""
+        onChangeValue={console.log}
+        options={[
+          { label: `Brazil`, value: `BRA` },
+          { label: `United States`, value: `USA` },
+          { label: `France`, value: `FRA` },
+        ]}
         error={formState.errors.value?.message}
       />
       <Row>
